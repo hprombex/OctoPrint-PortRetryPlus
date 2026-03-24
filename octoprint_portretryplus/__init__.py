@@ -43,8 +43,7 @@ class PortRetryPlusPlugin(
         return self._serial_port
 
     def __timer_condition(self):
-        if (
-            self.serial_port in [None, "AUTO"]) or (
+        if (self.serial_port in [None, "AUTO"]) or (
             not self._printer.is_closed_or_error()
         ):
             return False
@@ -54,7 +53,7 @@ class PortRetryPlusPlugin(
         self._timer = None
 
     def __create_timer(self):
-        if (not hasattr(self, '_timer')) or (self._timer is None):
+        if (not hasattr(self, "_timer")) or (self._timer is None):
             self._timer = RepeatedTimer(
                 self.__get_interval(),
                 self.do_auto_connect,
@@ -71,14 +70,14 @@ class PortRetryPlusPlugin(
             self._timer.cancel()
 
     def on_event(self, event: str, payload: dict):
-        if not hasattr(self, '_timer'):
+        if not hasattr(self, "_timer"):
             return  # only occurs during server startup
 
-        if 'Connected' == event:
-            self._logger.info('Printer connected, stopping timer')
+        if "Connected" == event:
+            self._logger.info("Printer connected, stopping timer")
             self.__stop_timer()
-        elif 'Disconnected' == event:
-            self._logger.info('Printer disconnected, starting timer')
+        elif "Disconnected" == event:
+            self._logger.info("Printer disconnected, starting timer")
             self.__start_timer()
 
     def on_after_startup(self, *args, **kwargs):
@@ -92,7 +91,7 @@ class PortRetryPlusPlugin(
         self.__stop_timer()
 
     def __get_interval(self) -> float:
-        return self._settings.get_float(['interval'], min=0.1)
+        return self._settings.get_float(["interval"], min=0.1)
 
     def __get_forced_port(self) -> str:
         return self._settings.get(["forced_port"])
@@ -103,8 +102,7 @@ class PortRetryPlusPlugin(
                 return
 
             printer_profile = self._printer_profile_manager.get_default()
-            profile = printer_profile[
-                'id'] if 'id' in printer_profile else '_default'
+            profile = printer_profile["id"] if "id" in printer_profile else "_default"
 
             if not self._printer.is_closed_or_error():
                 return
@@ -118,7 +116,7 @@ class PortRetryPlusPlugin(
                     self._logger.debug(f"using baudrate {baudrate}")
                     ser0 = serial.Serial(self.serial_port, baudrate)
                 else:
-                    self._logger.debug('using default baudrate')
+                    self._logger.debug("using default baudrate")
                     ser0 = serial.Serial(self.serial_port)
                 portopen = ser0.is_open
             except serial.SerialException:
@@ -130,47 +128,43 @@ class PortRetryPlusPlugin(
                 )
                 self._printer.connect(port=self.serial_port, profile=profile)
         except Exception:
-            self._logger.error(
-                f"Exception in do_auto_connect {get_exception_string()}"
-            )
+            self._logger.error(f"Exception in do_auto_connect {get_exception_string()}")
 
     def get_settings_defaults(self, *args, **kwargs):
         return dict(interval=5.0)
 
     def get_assets(self, *args, **kwargs):
-        return dict(js=['js/portretryplus.js'])
+        return dict(js=["js/portretryplus.js"])
 
     def get_update_information(self, *args, **kwargs):
         return dict(
             portretryplus=dict(
                 displayName=self._plugin_name,
                 displayVersion=self._plugin_version,
-
                 # use github release method of version check
-                type='github_release',
-                user='hprombex',
-                repo='OctoPrint-PortRetryPlus',
+                type="github_release",
+                user="hprombex",
+                repo="OctoPrint-PortRetryPlus",
                 current=self._plugin_version,
-
                 # update method: pip
-                pip='https://github.com/hprombex/OctoPrint-PortRetryPlus/archive/{target}.zip'
+                pip="https://github.com/hprombex/OctoPrint-PortRetryPlus/archive/{target}.zip",
             )
         )
 
     def on_settings_save(self, data):
-        interval = self._settings.get_float(['interval'], min=0.1)
+        interval = self._settings.get_float(["interval"], min=0.1)
 
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
-        new_interval = self._settings.get_float(['interval'], min=0.1)
+        new_interval = self._settings.get_float(["interval"], min=0.1)
         if interval != new_interval:
             self._logger.info(f"Retry interval changed to {new_interval}")
             self.__stop_timer()
             self.__start_timer()
 
 
-__plugin_name__ = 'PortRetryPlus'
-__plugin_pythoncompat__ = '>=3,<4'
+__plugin_name__ = "PortRetryPlus"
+__plugin_pythoncompat__ = ">=3,<4"
 
 
 def __plugin_load__():
@@ -180,5 +174,5 @@ def __plugin_load__():
 
     global __plugin_hooks__
     __plugin_hooks__ = {
-        'octoprint.plugin.softwareupdate.check_config': plugin.get_update_information,
+        "octoprint.plugin.softwareupdate.check_config": plugin.get_update_information,
     }
