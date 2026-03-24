@@ -2,14 +2,14 @@
 
 ########################################################################################################################
 
-plugin_identifier = "portretry"
-plugin_package = "octoprint_portretry"
-plugin_name = "OctoPrint-PortRetry"
-plugin_version = "0.1.4"
-plugin_description = """PortRetry retries the serial connection when the printer disconnects"""
-plugin_author = "vehystrix"
-plugin_author_email = "vehystrix@gmail.com"
-plugin_url = "https://github.com/vehystrix/OctoPrint-PortRetry"
+plugin_identifier = "portretryplus"
+plugin_package = "octoprint_portretryplus"
+plugin_name = "OctoPrint-PortRetryPlus"
+plugin_version = "1.0.0"
+plugin_description = """PortRetryPlus retries the serial connection when the printer disconnects"""
+plugin_author = "hprombex"
+plugin_author_email = "henryk.rombel@gmail.com"
+plugin_url = "https://github.com/hprombex/OctoPrint-PortRetryPlus"
 plugin_license = "AGPLv3"
 
 # Any additional requirements besides OctoPrint should be listed here

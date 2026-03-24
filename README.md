@@ -1,4 +1,4 @@
-# OctoPrint-PortRetry
+# OctoPrint-PortRetryPlus
 
 When the printer is disconnected, this plugin will try to reconnect the printer on a configurable interval
 
@@ -11,7 +11,7 @@ Should also work to solve the issue with Prusa printers that don't remove the se
 Install via the bundled [Plugin Manager](https://plugins.octoprint.org/)
 or manually using this URL:
 
-    https://github.com/vehystrix/OctoPrint-PortRetry/archive/master.zip
+    https://github.com/hprombex/OctoPrint-PortRetryPlus/archive/master.zip
 
 ## Configuration
 
@@ -19,7 +19,7 @@ In ~/.octoprint/config.yaml, the interval can be configured to something other t
 There is also a settings page in the webui
 ```
 plugins:
-  portretry:
+  portretryplus:
     interval: 5
 ```
 
@@ -36,14 +36,14 @@ To keep your printer working without having to reboot the lxc every time you tur
 
 I found the idea [here](https://monach.us/automation/connecting-zwave-stick-under-lxc/) (instructions will be for my setup with the lxc id 108 and the serial port /dev/ttyUSB0)
 
-* Check the info on the serial port 
+* Check the info on the serial port
   ```
   $ ls -l /dev/ttyUSB0
   crw-rw---- 1 root dialout 188, 0 Sep 13 20:32 /dev/ttyUSB0
   ```
 * Create the folder `/var/lib/lxc/108/devices`
 * Run `cd /var/lib/lxc/108/devices && mknod -m 660 ttyUSB0 c 188 0` to create an always available device linking to the same device as `/dev/ttyUSB0`
-* In the lxc config, add the newly created device to the lxc instead of `/dev/ttyUSB0`  
+* In the lxc config, add the newly created device to the lxc instead of `/dev/ttyUSB0`
   Also remember to map the dialout group (if your lxc is unprivileged), it has gid 20 for me
   ```
   lxc.cgroup.devices.allow: c 188:* rwm

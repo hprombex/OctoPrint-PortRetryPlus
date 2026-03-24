@@ -1,18 +1,18 @@
 ---
 layout: plugin
 
-id: portretry
-title: OctoPrint-PortRetry
-description: PortRetry retries the serial connection on a configurable interval when the printer disconnects
-author: VEhystrix
+id: portretryplus
+title: OctoPrint-PortRetryPlus
+description: PortRetryPlus retries the serial connection on a configurable interval when the printer disconnects
+author: hprombex
 license: AGPLv3
 
 # today's date in format YYYY-MM-DD
 date: 2024-09-15
 
-homepage: https://github.com/vehystrix/OctoPrint-PortRetry
-source: https://github.com/vehystrix/OctoPrint-PortRetry
-archive: https://github.com/vehystrix/OctoPrint-PortRetry/archive/main.zip
+homepage: https://github.com/hprombex/OctoPrint-PortRetryPlus
+source: https://github.com/hprombex/OctoPrint-PortRetryPlus
+archive: https://github.com/hprombex/OctoPrint-PortRetryPlus/archive/main.zip
 
 # Set this if your plugin heavily interacts with any kind of cloud services.
 #privacypolicy: your plugin's privacy policy URL
@@ -93,7 +93,7 @@ compatibility:
 
 # TODO
 # If any of the below attributes apply to your project, uncomment the corresponding lines. This is MANDATORY!
-    
+
 #attributes:
 #  - cloud  # if your plugin requires access to a cloud to function
 #  - commercial  # if your plugin has a commercial aspect to it
@@ -114,7 +114,7 @@ In ~/.octoprint/config.yaml, the interval can be configured to something other t
 There is also a settings page in the webui
 ```
 plugins:
-  portretry:
+  portretryplus:
     interval: 5
 ```
 

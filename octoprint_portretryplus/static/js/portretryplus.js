@@ -1,12 +1,12 @@
 $(function () {
-    function PortRetryViewModel(parameters) {
+    function PortRetryPlusViewModel(parameters) {
         var self = this;
 
         self.connection = parameters[0];
         self.settingsViewModel = parameters[1];
 
         self.onDataUpdaterPluginMessage = function(plugin, message) {
-            if (plugin == "PortRetry") {
+            if (plugin == "PortRetryPlus") {
                 self.connection.requestData();
             }
         }
@@ -17,8 +17,8 @@ $(function () {
     }
 
     OCTOPRINT_VIEWMODELS.push({
-        construct: PortRetryViewModel,
+        construct: PortRetryPlusViewModel,
         dependencies: ["connectionViewModel", "settingsViewModel"],
-        elements: ["#settings_plugin_portretry"]
+        elements: ["#settings_plugin_portretryplus"]
     });
 });
