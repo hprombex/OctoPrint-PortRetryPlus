@@ -64,3 +64,9 @@ I found the idea [here](https://monach.us/automation/connecting-zwave-stick-unde
   lxc.idmap: u 21 100021 65515
   lxc.idmap: g 21 100021 65515
   ```
+
+## Credits
+
+This project is based on [OctoPrint-PortRetry](https://github.com/vehystrix/OctoPrint-PortRetry) by vehystrix.
+
+This fork introduces additional improvements, including smarter reconnect logic, forced serial port support, and more robust connection handling.
