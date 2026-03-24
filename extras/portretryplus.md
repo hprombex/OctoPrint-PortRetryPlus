@@ -116,9 +116,10 @@ There is also a settings page in the webui
 plugins:
   portretryplus:
     interval: 5
+    force_port: /dev/ttyUSB0
 ```
 
-**This plugin will do nothing if the serial port in Serial Connection > General is set to `AUTO`, you will need to specify a port there for this plugin to work!** Or in ~/.octoprint/config.yaml:
+**Note:** Unlike the original plugin, this fork **can work even if `Serial Connection > General > Port` is set to `AUTO`**, as long as `forced_port` is configured in the plugin settings.
 ```
 serial:
   port: /dev/ttyUSB0
